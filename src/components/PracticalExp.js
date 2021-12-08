@@ -3,13 +3,21 @@ import React, { Component } from "react";
 class PracticalExp extends Component {
   constructor(props) {
       super(props);
+
+      this.toggleIsAdding = this.toggleIsAdding.bind(this);
+
+      this.state = {
+        isAddingExp: false
+      };
   };
 
-  render() {
+  toggleIsAdding() {
+    this.state.isAddingExp ? this.setState({isAddingExp: false}) : this.setState({isAddingExp: true});
+  };
 
-    return (
+  blankForm() {
+    const form =
       <form>
-        <h1>Experience</h1>
         <div>
             <label name="title">Title</label>
             <input type="text" id="title" name="title" required minLength="1"></input>
@@ -30,10 +38,30 @@ class PracticalExp extends Component {
             <input type="text" id="end-date" name="end-date" required minLength="4" maxLength="4"></input>
         </div>
         <div>
-            <button>Cancel</button>
-            <button>Submit</button>
+            <button onClick={this.toggleIsAdding}>Cancel</button>
+            <button>Save</button>
         </div>
-      </form>
+      </form>;
+    return form
+  };
+
+  render() {
+
+    return (
+      <div>
+        <div className="Heading">
+            <h1>Experience</h1>
+
+            {this.state.isAddingExp
+              ? <div></div>
+              : <button onClick={this.toggleIsAdding}>+</button> 
+            }
+        </div>
+        {this.state.isAddingExp
+          ? this.blankForm()
+          : <div></div>
+        }
+      </div>
     );
   }
 };
