@@ -28,7 +28,8 @@ class CVInput extends Component {
             degree: ,
             startDate: ,
             endDate:
-          },*/
+          },
+          {},...*/
         ],
         practicalExp: [
           /*{
@@ -37,13 +38,15 @@ class CVInput extends Component {
             city: ,
             startDate: ,
             endDate: 
-          } */
+          },
+          {}, ...*/
         ],
       };
   };
 
   liftStateToCVInput(name, value) {
-    this.setState({[name]: value});
+    this.setState({[name]: value}, console.log("CVInput's state", this.state));
+    //console.log("CVInput's state", this.state);
   };
 
   render() {
@@ -51,8 +54,10 @@ class CVInput extends Component {
     return (
       <div className="cv-inputs" >
           <GeneralInfo liftStateToCVInput={this.liftStateToCVInput} />
-          <EducationExp />
+          <EducationExp liftStateToCVInput={this.liftStateToCVInput} edExp={this.state.educationExp} />
           <PracticalExp />
+          <p>generalInfo first name: {this.state.generalInfo.firstName}</p>
+          
       </div>
     );
   }

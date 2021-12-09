@@ -19,7 +19,7 @@ class GeneralInfo extends Component {
     const value = e.target.value;
 
     if(name === 'first-name') {
-      this.setState({firstName: value})
+      this.setState(() => ({firstName: value}))
     }
     else if(name === 'last-name') {
       this.setState({lastName: value})
@@ -29,11 +29,8 @@ class GeneralInfo extends Component {
     } 
     else if(name === 'phone') {
       this.setState({phone: value})
-    } 
-    else {
-      console.log('unkown general info being changed')
     }
-    console.log("generalInfo's state", this.state);
+    //console.log("generalInfo's state", this.state);
     this.props.liftStateToCVInput('generalInfo', this.state);
   }
 
