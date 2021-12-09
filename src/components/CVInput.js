@@ -45,8 +45,7 @@ class CVInput extends Component {
   };
 
   liftStateToCVInput(name, value) {
-    this.setState({[name]: value}, console.log("CVInput's state", this.state));
-    //console.log("CVInput's state", this.state);
+    this.setState({[name]: value}, () => console.log("CVInput's state", this.state));
   };
 
   render() {

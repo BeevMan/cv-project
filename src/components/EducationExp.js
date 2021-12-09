@@ -38,13 +38,11 @@ class EducationExp extends Component {
     e.preventDefault();
 
     let experiences = this.props.edExp.concat(this.state.exp);
-    console.log('experiences', experiences);
     this.props.liftStateToCVInput('educationExp', experiences);
     this.cancelExp()
   };
 
   cancelExp = () => {
-    //this.defExpState();
     this.setState({
       exp: { 
         name: "",
@@ -53,7 +51,7 @@ class EducationExp extends Component {
         startDate: 0,
         endDate: 0
       },
-    }, this.toggleIsAdding());
+    }, this.toggleIsAdding);
   };
 
   blankForm() {

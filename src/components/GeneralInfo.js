@@ -19,19 +19,17 @@ class GeneralInfo extends Component {
     const value = e.target.value;
 
     if(name === 'first-name') {
-      this.setState(() => ({firstName: value}))
+      this.setState({firstName: value}, () => this.props.liftStateToCVInput('generalInfo', this.state))
     }
     else if(name === 'last-name') {
-      this.setState({lastName: value})
+      this.setState({lastName: value}, () => this.props.liftStateToCVInput('generalInfo', this.state))
     } 
     else if(name === 'email') {
-      this.setState({email: value})
+      this.setState({email: value}, () => this.props.liftStateToCVInput('generalInfo', this.state))
     } 
     else if(name === 'phone') {
-      this.setState({phone: value})
+      this.setState({phone: value}, () => this.props.liftStateToCVInput('generalInfo', this.state))
     }
-    //console.log("generalInfo's state", this.state);
-    this.props.liftStateToCVInput('generalInfo', this.state);
   }
 
   render() {
