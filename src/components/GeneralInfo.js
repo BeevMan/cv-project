@@ -4,7 +4,7 @@ class GeneralInfo extends Component {
   constructor(props) {
     super(props);
 
-    this.updateGeneralInfo = this.updateGeneralInfo.bind(this);
+    this.updateGeneralInfo = this.updateGeneralInfo.bind(this); // in lieu of binding like this, updateGeneralInfo could be turned into an arrow function
 
     this.state = {
       firstName: '',

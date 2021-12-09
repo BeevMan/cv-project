@@ -29,7 +29,7 @@ class CVInput extends Component {
             startDate: ,
             endDate:
           },
-          {},...*/
+          {}, ...*/
         ],
         practicalExp: [
           /*{
@@ -54,7 +54,7 @@ class CVInput extends Component {
       <div className="cv-inputs" >
           <GeneralInfo liftStateToCVInput={this.liftStateToCVInput} />
           <EducationExp liftStateToCVInput={this.liftStateToCVInput} edExp={this.state.educationExp} />
-          <PracticalExp />
+          <PracticalExp liftStateToCVInput={this.liftStateToCVInput} practExp={this.state.practicalExp} />
           <p>generalInfo first name: {this.state.generalInfo.firstName}</p>
           
       </div>

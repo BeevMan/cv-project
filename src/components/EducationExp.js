@@ -4,8 +4,6 @@ class EducationExp extends Component {
   constructor(props) {
       super(props);
 
-      this.toggleIsAdding = this.toggleIsAdding.bind(this);
-
       this.state = {
         isAddingEd: false,
         exp: {
@@ -18,7 +16,7 @@ class EducationExp extends Component {
       };
   };
 
-  toggleIsAdding() {
+  toggleIsAdding= () => {
     this.state.isAddingEd ? this.setState({isAddingEd: false}) : this.setState({isAddingEd: true});
   };
 
@@ -50,7 +48,7 @@ class EducationExp extends Component {
         degree: "",
         startDate: 0,
         endDate: 0
-      },
+      }
     }, this.toggleIsAdding);
   };
 
