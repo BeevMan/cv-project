@@ -40,7 +40,9 @@ class EducationExp extends Component {
     this.cancelExp()
   };
 
-  cancelExp = () => {
+  cancelExp = (e) => {
+    e.preventDefault();
+
     this.setState({
       exp: { 
         name: "",

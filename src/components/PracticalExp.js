@@ -40,7 +40,9 @@ class PracticalExp extends Component {
     this.cancelExp()
   };
 
-  cancelExp = () => {
+  cancelExp = (e) => {
+    e.preventDefault();
+
     this.setState({
       exp: {
         title: "",
