@@ -37,7 +37,7 @@ class PracticalExp extends Component {
 
     let experiences = this.props.practExp.concat(this.state.exp);
     this.props.liftStateToCVInput('practicalExp', experiences);
-    this.cancelExp()
+    this.cancelExp(e)
   };
 
   cancelExp = (e) => {
@@ -54,34 +54,43 @@ class PracticalExp extends Component {
     }, this.toggleIsAdding);
   };
 
-  blankForm() {
-    const form =
-      <form>
-        <div>
-            <label name="title">Title</label>
-            <input onChange={this.updateCurExp} type="text" id="title" name="title" required minLength="1"></input>
-        </div>
-        <div>
-            <label name="name">Company Name</label>
-            <input onChange={this.updateCurExp} type="text" id="name" name="name" required minLength="1"></input>
-        </div>
-        <div>
-            <label name="city">City</label>
-            <input onChange={this.updateCurExp} type="text" id="city" name="city" required minLength="1"></input>
-        </div>
-        <div>
-            <label name="start-date">Start date</label>
-            <input onChange={this.updateCurExp} type="text" id="start-date" name="start-date" required minLength="4" maxLength="4"></input>
+  displayAddExpBtn = () => {
+    if (!this.state.isAddingExp) {
+      return <button onClick={this.toggleIsAdding}>+</button>
+    }
+  };
 
-            <label name="end-date">End date</label>
-            <input onChange={this.updateCurExp} type="text" id="end-date" name="end-date" required minLength="4" maxLength="4"></input>
-        </div>
-        <div>
-            <button onClick={this.cancelExp}>Cancel</button>
-            <button onClick={this.saveExp}>Save</button>
-        </div>
-      </form>;
-    return form
+  displayBlankForm() {
+    if (this.state.isAddingExp) {
+      const form =
+        <form>
+          <div>
+              <label name="title">Title</label>
+              <input onChange={this.updateCurExp} type="text" id="title" name="title" required minLength="1"></input>
+          </div>
+          <div>
+              <label name="name">Company Name</label>
+              <input onChange={this.updateCurExp} type="text" id="name" name="name" required minLength="1"></input>
+          </div>
+          <div>
+              <label name="city">City</label>
+              <input onChange={this.updateCurExp} type="text" id="city" name="city" required minLength="1"></input>
+          </div>
+          <div>
+              <label name="start-date">Start date</label>
+              <input onChange={this.updateCurExp} type="text" id="start-date" name="start-date" required minLength="4" maxLength="4"></input>
+
+              <label name="end-date">End date</label>
+              <input onChange={this.updateCurExp} type="text" id="end-date" name="end-date" required minLength="4" maxLength="4"></input>
+          </div>
+          <div>
+              <button onClick={this.cancelExp}>Cancel</button>
+              <button onClick={this.saveExp}>Save</button>
+          </div>
+        </form>;
+
+      return form
+    }
   };
 
   render() {
@@ -90,16 +99,9 @@ class PracticalExp extends Component {
       <div>
         <div className="Heading">
             <h1>Experience</h1>
-
-            {this.state.isAddingExp
-              ? <div></div>
-              : <button onClick={this.toggleIsAdding}>+</button> 
-            }
+            {this.displayAddExpBtn()}
         </div>
-        {this.state.isAddingExp
-          ? this.blankForm()
-          : <div></div>
-        }
+        {this.displayBlankForm()}
       </div>
     );
   }

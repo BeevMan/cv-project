@@ -37,7 +37,7 @@ class EducationExp extends Component {
 
     let experiences = this.props.edExp.concat(this.state.exp);
     this.props.liftStateToCVInput('educationExp', experiences);
-    this.cancelExp()
+    this.cancelExp(e)
   };
 
   cancelExp = (e) => {
@@ -54,8 +54,15 @@ class EducationExp extends Component {
     }, this.toggleIsAdding);
   };
 
-  blankForm() {
-    const form = 
+  displayAddExpBtn = () => {
+    if (!this.state.isAddingEd) {
+      return <button onClick={this.toggleIsAdding}>+</button>
+    }
+  };
+
+  displayBlankForm() {
+    if (this.state.isAddingEd) {
+      const form = 
       <form>
         <div>
             <label name="name">University / School name</label>
@@ -82,7 +89,8 @@ class EducationExp extends Component {
         </div>
       </form>;
 
-    return form;
+      return form;
+    }
   };
 
   render() {
@@ -92,15 +100,9 @@ class EducationExp extends Component {
         <div className="Heading">
             <h1>Education</h1>
             
-            {this.state.isAddingEd
-              ? <div></div>
-              : <button onClick={this.toggleIsAdding}>+</button>
-            }
+            {this.displayAddExpBtn()}
         </div>
-        {this.state.isAddingEd
-          ? this.blankForm()
-          : <div></div>
-        }
+        {this.displayBlankForm()}
       </div>
     );
   }
