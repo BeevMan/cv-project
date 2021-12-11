@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import uniqid from "uniqid";
+
 class EducationExp extends Component {
   constructor(props) {
       super(props);
@@ -11,7 +13,8 @@ class EducationExp extends Component {
           city: "",
           degree: "",
           startDate: 0,
-          endDate: 0
+          endDate: 0,
+          id: uniqid()
         },
       };
   };
@@ -60,6 +63,31 @@ class EducationExp extends Component {
     }
   };
 
+  displayExperiences() {
+    if (this.props.edExp.length) {
+      const elExperiences = 
+        <div>
+          {this.props.edExp.map((exp) => {
+            const elExp = 
+              <ul key={exp.id}>
+                <p>{ (() => {
+                      let strOfProperties = '';
+                      for (const key in exp ) {
+                        if (key !== 'id') {
+                          strOfProperties += exp[key] + ' '
+                      }}
+                      return strOfProperties
+                    })()}
+                </p>
+              </ul>;
+            return elExp
+          })}
+        </div>
+
+      return elExperiences
+    }
+  }
+
   displayBlankForm() {
     if (this.state.isAddingEd) {
       const form = 
@@ -102,6 +130,7 @@ class EducationExp extends Component {
             
             {this.displayAddExpBtn()}
         </div>
+        {this.displayExperiences()}
         {this.displayBlankForm()}
       </div>
     );

@@ -55,8 +55,6 @@ class CVInput extends Component {
           <GeneralInfo liftStateToCVInput={this.liftStateToCVInput} />
           <EducationExp liftStateToCVInput={this.liftStateToCVInput} edExp={this.state.educationExp} />
           <PracticalExp liftStateToCVInput={this.liftStateToCVInput} practExp={this.state.practicalExp} />
-          <p>generalInfo first name: {this.state.generalInfo.firstName}</p>
-          
       </div>
     );
   }

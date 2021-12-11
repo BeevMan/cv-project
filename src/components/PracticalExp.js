@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import uniqid from "uniqid";
+
 class PracticalExp extends Component {
   constructor(props) {
       super(props);
@@ -12,6 +14,7 @@ class PracticalExp extends Component {
           city: "",
           startDate: 0,
           endDate: 0,
+          id: uniqid()
         }
       };
   };
@@ -49,7 +52,7 @@ class PracticalExp extends Component {
         name: "",
         city: "",
         startDate: 0,
-        endDate: 0,
+        endDate: 0
       }
     }, this.toggleIsAdding);
   };
@@ -59,6 +62,31 @@ class PracticalExp extends Component {
       return <button onClick={this.toggleIsAdding}>+</button>
     }
   };
+
+  displayExperiences() {
+    if (this.props.practExp.length) {
+      const elExperiences = 
+        <div>
+          {this.props.practExp.map((exp) => {
+            const elExp = 
+              <ul key={exp.id}>
+                <p>{ (() => {
+                      let strOfProperties = '';
+                      for (const key in exp ) {
+                        if (key !== 'id') {
+                          strOfProperties += exp[key] + ' '
+                      }}
+                      return strOfProperties
+                    })()}
+                </p>
+              </ul>;
+            return elExp
+          })}
+        </div>
+
+      return elExperiences
+    }
+  }
 
   displayBlankForm() {
     if (this.state.isAddingExp) {
@@ -101,6 +129,7 @@ class PracticalExp extends Component {
             <h1>Experience</h1>
             {this.displayAddExpBtn()}
         </div>
+        {this.displayExperiences()}
         {this.displayBlankForm()}
       </div>
     );
