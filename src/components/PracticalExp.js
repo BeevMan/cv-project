@@ -52,7 +52,8 @@ class PracticalExp extends Component {
         name: "",
         city: "",
         startDate: 0,
-        endDate: 0
+        endDate: 0,
+        id: uniqid()
       }
     }, this.toggleIsAdding);
   };
@@ -70,15 +71,14 @@ class PracticalExp extends Component {
           {this.props.practExp.map((exp) => {
             const elExp = 
               <ul key={exp.id}>
-                <p>{ (() => {
+                { (() => {
                       let strOfProperties = '';
                       for (const key in exp ) {
                         if (key !== 'id') {
                           strOfProperties += exp[key] + ' '
                       }}
                       return strOfProperties
-                    })()}
-                </p>
+                })()}
               </ul>;
             return elExp
           })}

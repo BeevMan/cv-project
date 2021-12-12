@@ -52,7 +52,8 @@ class EducationExp extends Component {
         city: "",
         degree: "",
         startDate: 0,
-        endDate: 0
+        endDate: 0,
+        id: uniqid()
       }
     }, this.toggleIsAdding);
   };
@@ -70,15 +71,14 @@ class EducationExp extends Component {
           {this.props.edExp.map((exp) => {
             const elExp = 
               <ul key={exp.id}>
-                <p>{ (() => {
+                { (() => {
                       let strOfProperties = '';
                       for (const key in exp ) {
                         if (key !== 'id') {
                           strOfProperties += exp[key] + ' '
                       }}
                       return strOfProperties
-                    })()}
-                </p>
+                })()}
               </ul>;
             return elExp
           })}
