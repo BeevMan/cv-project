@@ -8,6 +8,7 @@ class PracticalExp extends Component {
 
       this.state = {
         isAddingExp: false,
+        isEditingExp: false,
         exp: {
           title: "",
           name: "",
@@ -65,23 +66,26 @@ class PracticalExp extends Component {
   };
 
   displayExperiences() {
-    if (this.props.practExp.length) {
+    if (this.props.practExp.length && this.state.isEditingExp === false) {
       const elExperiences = 
         <div>
-          {this.props.practExp.map((exp) => {
-            const elExp = 
-              <ul key={exp.id}>
-                { (() => {
-                      let strOfProperties = '';
-                      for (const key in exp ) {
-                        if (key !== 'id') {
-                          strOfProperties += exp[key] + ' '
-                      }}
-                      return strOfProperties
-                })()}
-              </ul>;
-            return elExp
-          })}
+          <ul>
+            {this.props.practExp.map((exp) => {
+              const elExp = 
+                <li key={exp.id}>
+                  { (() => {
+                        let strOfProperties = '';
+                        for (const key in exp ) {
+                          if (key !== 'id') {
+                            strOfProperties += exp[key] + ' '
+                        }}
+                        return strOfProperties
+                  })()}
+                  <button>edit</button>
+                </li>;
+              return elExp
+            })}
+          </ul>
         </div>
 
       return elExperiences
