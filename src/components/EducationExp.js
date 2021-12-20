@@ -80,6 +80,7 @@ class EducationExp extends Component {
                         }}
                         return strOfProperties
                   })()}
+                  <button>edit</button>
                 </li>;
               return elExp
             })}
