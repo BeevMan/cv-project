@@ -8,6 +8,9 @@ class EducationExp extends Component {
 
       this.state = {
         isAddingEd: false,
+        isEditingExp: false,
+        editingExpId: 0,
+        expInEdit: {},
         exp: {
           name: "",
           city: "",
@@ -38,7 +41,7 @@ class EducationExp extends Component {
   saveExp = (e) => {
     e.preventDefault();
 
-    let experiences = this.props.edExp.concat(this.state.exp);
+    const experiences = this.props.edExp.concat(this.state.exp);
     this.props.liftStateToCVInput('educationExp', experiences);
     this.cancelExp(e)
   };
@@ -64,6 +67,69 @@ class EducationExp extends Component {
     }
   };
 
+  toggleIsEditing = (e) => {
+    let exp;
+    if (e) {
+      const id = e.target.parentNode.getAttribute('id');
+      const experiences = this.props.edExp;
+      const expInd = experiences.findIndex((exp) => exp.id === id);
+      exp = experiences[expInd];
+    }
+    this.state.isEditingExp ? this.setState({isEditingExp: false, expInEdit: {}}) : this.setState({isEditingExp: true, expInEdit: exp});
+  };
+
+  saveExpEdit = (e) => {
+    e.preventDefault();
+    const experiences = this.props.edExp;
+    const expInd = experiences.findIndex((exp) => exp.id === this.state.expInEdit.id);
+    experiences[expInd] = this.state.expInEdit;
+    this.props.liftStateToCVInput('educationExp', experiences);
+    this.toggleIsEditing(); // should I pass e into this function???
+  };
+
+  saveExpEditOnChange = (e) => {
+    const changeExp = this.state.expInEdit;
+    let id = e.target.id;
+    if(id === 'start-date') {
+      id = 'startDate'
+    } else if(id === 'end-date') {
+      id = 'endDate'
+    }
+    changeExp[id] = e.target.value;
+    this.setState({expInEdit: changeExp});
+  };
+
+  editExperience = () => {
+    const exp = this.state.expInEdit;
+    const form =
+      <form>
+        <div>
+            <label name="name">University / School name</label>
+            <input type="text" id="name" name="name" onChange={this.saveExpEditOnChange} defaultValue={exp.name} required minLength="1"></input>
+        </div>
+        <div>
+            <label name="city">City</label>
+            <input type="text" id="city" name="city"  onChange={this.saveExpEditOnChange} defaultValue={exp.city} required minLength="1"></input>
+        </div>
+        <div>
+            <label name="degree">Degree / Certification</label>
+            <input type="text" id="degree" name="degree" onChange={this.saveExpEditOnChange} defaultValue={exp.degree} required minLength="1"></input>
+        </div>
+        <div>
+            <label name="start-date">Start date</label>
+            <input type="text" id="start-date" name="start-date" onChange={this.saveExpEditOnChange} defaultValue={exp.startDate} required minLength="4" maxLength="4"></input>
+
+            <label name="end-date">End date</label>
+            <input type="text" id="end-date" name="end-date" onChange={this.saveExpEditOnChange} defaultValue={exp.endDate} required minLength="4" maxLength="4"></input>
+        </div>
+        <div>
+            <button onClick={this.toggleIsEditing}>Cancel</button>
+            <button onClick={this.saveExpEdit}>Save edit</button>
+        </div>
+      </form>;
+      return form
+  };
+
   displayExperiences() {
     if (this.props.edExp.length) {
       const elExperiences = 
@@ -71,7 +137,7 @@ class EducationExp extends Component {
           <ul>
             {this.props.edExp.map((exp) => {
               const elExp = 
-                <li key={exp.id}>
+                <li key={exp.id} id={exp.id}>
                   { (() => {
                         let strOfProperties = '';
                         for (const key in exp ) {
@@ -80,7 +146,7 @@ class EducationExp extends Component {
                         }}
                         return strOfProperties
                   })()}
-                  <button>edit</button>
+                  <button onClick={this.toggleIsEditing}>edit</button>
                 </li>;
               return elExp
             })}
@@ -133,7 +199,10 @@ class EducationExp extends Component {
             
             {this.displayAddExpBtn()}
         </div>
-        {this.displayExperiences()}
+        { this.state.isEditingExp
+          ? this.editExperience()
+          : this.displayExperiences()
+        }
         {this.displayBlankForm()}
       </div>
     );
