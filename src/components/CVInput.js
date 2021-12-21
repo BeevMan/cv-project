@@ -12,8 +12,6 @@ class CVInput extends Component {
   constructor(props) {
       super(props);
 
-      this.liftStateToCVInput = this.liftStateToCVInput.bind(this);
-
       this.state = {
         generalInfo: { /*
           firstName: '',
@@ -44,14 +42,19 @@ class CVInput extends Component {
       };
   };
 
-  liftStateToCVInput(name, value) {
+  liftStateToCVInput = (name, value) => {
     this.setState({[name]: value}, () => console.log("CVInput's state", this.state));
+  };
+
+  logState = () => {
+    console.log(this.state)
   };
 
   render() {
 
     return (
       <div className="cv-inputs" >
+          <button onClick={this.logState}>log state</button>
           <GeneralInfo liftStateToCVInput={this.liftStateToCVInput} />
           <EducationExp liftStateToCVInput={this.liftStateToCVInput} edExp={this.state.educationExp} />
           <PracticalExp liftStateToCVInput={this.liftStateToCVInput} practExp={this.state.practicalExp} />

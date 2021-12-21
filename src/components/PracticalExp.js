@@ -9,7 +9,6 @@ class PracticalExp extends Component {
       this.state = {
         isAddingExp: false,
         isEditingExp: false,
-        editingExpId: 0,
         expInEdit: {},
         exp: {
           title: "",
@@ -70,12 +69,17 @@ class PracticalExp extends Component {
   toggleIsEditing = (e) => {
     let exp;
     if (e) {
-      const id = e.target.parentNode.getAttribute('id');
-      const experiences = this.props.practExp;
-      const expInd = experiences.findIndex((exp) => exp.id === id);
-      exp = experiences[expInd];
+      if (e.target.innerText === 'Cancel') {
+        e.preventDefault();
+      } else {
+        const id = e.target.parentNode.getAttribute('id');
+        const experiences = this.props.practExp;
+        const expInd = experiences.findIndex((exp) => exp.id === id);
+        exp = experiences[expInd];
+      }
     }
     this.state.isEditingExp ? this.setState({isEditingExp: false, expInEdit: {}}) : this.setState({isEditingExp: true, expInEdit: exp});
+    console.log(this.props.practExp)
   };
 
   saveExpEdit = (e) => {
@@ -84,7 +88,7 @@ class PracticalExp extends Component {
     const expInd = experiences.findIndex((exp) => exp.id === this.state.expInEdit.id);
     experiences[expInd] = this.state.expInEdit;
     this.props.liftStateToCVInput('practicalExp', experiences);
-    this.toggleIsEditing(); // should I pass e into this function???
+    this.toggleIsEditing();
   };
 
   saveExpEditOnChange = (e) => {
@@ -105,22 +109,22 @@ class PracticalExp extends Component {
       <form>
         <div>
             <label name="title">Title</label>
-            <input type="text" id="title" name="title" onChange={this.saveExpEditOnChange} defaultValue={exp.title} required minLength="1"></input>
+            <input type="text" id="title" name="title" onChange={this.saveExpEditOnChange} value={exp.title} required minLength="1"></input>
         </div>
         <div>
             <label name="name">Company Name</label>
-            <input type="text" id="name" name="name"  onChange={this.saveExpEditOnChange} defaultValue={exp.name} required minLength="1"></input>
+            <input type="text" id="name" name="name"  onChange={this.saveExpEditOnChange} value={exp.name} required minLength="1"></input>
         </div>
         <div>
             <label name="city">City</label>
-            <input type="text" id="city" name="city" onChange={this.saveExpEditOnChange} defaultValue={exp.city} required minLength="1"></input>
+            <input type="text" id="city" name="city" onChange={this.saveExpEditOnChange} value={exp.city} required minLength="1"></input>
         </div>
         <div>
             <label name="start-date">Start date</label>
-            <input type="text" id="start-date" name="start-date" onChange={this.saveExpEditOnChange} defaultValue={exp.startDate} required minLength="4" maxLength="4"></input>
+            <input type="text" id="start-date" name="start-date" onChange={this.saveExpEditOnChange} value={exp.startDate} required minLength="4" maxLength="4"></input>
 
             <label name="end-date">End date</label>
-            <input type="text" id="end-date" name="end-date" onChange={this.saveExpEditOnChange} defaultValue={exp.endDate} required minLength="4" maxLength="4"></input>
+            <input type="text" id="end-date" name="end-date" onChange={this.saveExpEditOnChange} value={exp.endDate} required minLength="4" maxLength="4"></input>
         </div>
         <div>
             <button onClick={this.toggleIsEditing}>Cancel</button>
@@ -163,22 +167,22 @@ class PracticalExp extends Component {
         <form>
           <div>
               <label name="title">Title</label>
-              <input onChange={this.updateCurExp} type="text" id="title" name="title" defaultValue={this.state.exp.title} required minLength="1"></input>
+              <input onChange={this.updateCurExp} type="text" id="title" name="title" value={this.state.exp.title} required minLength="1"></input>
           </div>
           <div>
               <label name="name">Company Name</label>
-              <input onChange={this.updateCurExp} type="text" id="name" name="name" defaultValue={this.state.exp.name} required minLength="1"></input>
+              <input onChange={this.updateCurExp} type="text" id="name" name="name" value={this.state.exp.name} required minLength="1"></input>
           </div>
           <div>
               <label name="city">City</label>
-              <input onChange={this.updateCurExp} type="text" id="city" name="city" defaultValue={this.state.exp.city} required minLength="1"></input>
+              <input onChange={this.updateCurExp} type="text" id="city" name="city" value={this.state.exp.city} required minLength="1"></input>
           </div>
           <div>
               <label name="start-date">Start date</label>
-              <input onChange={this.updateCurExp} type="text" id="start-date" name="start-date" defaultValue={this.state.exp.startDate} required minLength="4" maxLength="4"></input>
+              <input onChange={this.updateCurExp} type="text" id="start-date" name="start-date" value={this.state.exp.startDate} required minLength="4" maxLength="4"></input>
 
               <label name="end-date">End date</label>
-              <input onChange={this.updateCurExp} type="text" id="end-date" name="end-date" defaultValue={this.state.exp.endDate} required minLength="4" maxLength="4"></input>
+              <input onChange={this.updateCurExp} type="text" id="end-date" name="end-date" value={this.state.exp.endDate} required minLength="4" maxLength="4"></input>
           </div>
           <div>
               <button onClick={this.cancelExp}>Cancel</button>

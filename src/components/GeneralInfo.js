@@ -39,19 +39,19 @@ class GeneralInfo extends Component {
         <h1>Personal Info</h1>
         <div>
             <label name="first-name">First Name</label>
-            <input onChange={this.updateGeneralInfo} type="text" id="first-name" name="first-name" required minLength="1"></input>
+            <input onChange={this.updateGeneralInfo} type="text" id="first-name" name="first-name" value={this.state.firstName} required minLength="1"></input>
         </div>
         <div>
             <label name="last-name">Last Name</label>
-            <input onChange={this.updateGeneralInfo} type="text" id="last-name" name="last-name" required minLength="1"></input>
+            <input onChange={this.updateGeneralInfo} type="text" id="last-name" name="last-name" value={this.state.lastName} required minLength="1"></input>
         </div>
         <div>
             <label name="email">Email</label>
-            <input onChange={this.updateGeneralInfo} type="text" id="email" name="email" required minLength="1"></input>
+            <input onChange={this.updateGeneralInfo} type="text" id="email" name="email" value={this.state.email} required minLength="1"></input>
         </div>
         <div>
             <label name="phone">Phone</label>
-            <input onChange={this.updateGeneralInfo} type="text" id="phone" name="phone" required minLength="1"></input>
+            <input onChange={this.updateGeneralInfo} type="text" id="phone" name="phone" value={this.state.phone} required minLength="1"></input>
         </div>
       </form>
     );

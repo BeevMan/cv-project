@@ -9,7 +9,6 @@ class EducationExp extends Component {
       this.state = {
         isAddingEd: false,
         isEditingExp: false,
-        editingExpId: 0,
         expInEdit: {},
         exp: {
           name: "",
@@ -105,22 +104,22 @@ class EducationExp extends Component {
       <form>
         <div>
             <label name="name">University / School name</label>
-            <input type="text" id="name" name="name" onChange={this.saveExpEditOnChange} defaultValue={exp.name} required minLength="1"></input>
+            <input type="text" id="name" name="name" onChange={this.saveExpEditOnChange} value={exp.name} required minLength="1"></input>
         </div>
         <div>
             <label name="city">City</label>
-            <input type="text" id="city" name="city"  onChange={this.saveExpEditOnChange} defaultValue={exp.city} required minLength="1"></input>
+            <input type="text" id="city" name="city"  onChange={this.saveExpEditOnChange} value={exp.city} required minLength="1"></input>
         </div>
         <div>
             <label name="degree">Degree / Certification</label>
-            <input type="text" id="degree" name="degree" onChange={this.saveExpEditOnChange} defaultValue={exp.degree} required minLength="1"></input>
+            <input type="text" id="degree" name="degree" onChange={this.saveExpEditOnChange} value={exp.degree} required minLength="1"></input>
         </div>
         <div>
             <label name="start-date">Start date</label>
-            <input type="text" id="start-date" name="start-date" onChange={this.saveExpEditOnChange} defaultValue={exp.startDate} required minLength="4" maxLength="4"></input>
+            <input type="text" id="start-date" name="start-date" onChange={this.saveExpEditOnChange} value={exp.startDate} required minLength="4" maxLength="4"></input>
 
             <label name="end-date">End date</label>
-            <input type="text" id="end-date" name="end-date" onChange={this.saveExpEditOnChange} defaultValue={exp.endDate} required minLength="4" maxLength="4"></input>
+            <input type="text" id="end-date" name="end-date" onChange={this.saveExpEditOnChange} value={exp.endDate} required minLength="4" maxLength="4"></input>
         </div>
         <div>
             <button onClick={this.toggleIsEditing}>Cancel</button>
@@ -163,22 +162,22 @@ class EducationExp extends Component {
       <form>
         <div>
             <label name="name">University / School name</label>
-            <input onChange={this.updateCurExp} type="text" id="name" name="name" defaultValue={this.state.exp.name} required minLength="1"></input>
+            <input onChange={this.updateCurExp} type="text" id="name" name="name" value={this.state.exp.name} required minLength="1"></input>
         </div>
         <div>
             <label name="city">City</label>
-            <input onChange={this.updateCurExp} type="text" id="city" name="city" defaultValue={this.state.exp.city} required minLength="1"></input>
+            <input onChange={this.updateCurExp} type="text" id="city" name="city" value={this.state.exp.city} required minLength="1"></input>
         </div>
         <div>
             <label name="degree">Degree / Certification</label>
-            <input onChange={this.updateCurExp} type="text" id="degree" name="degree" defaultValue={this.state.exp.degree} required minLength="1"></input>
+            <input onChange={this.updateCurExp} type="text" id="degree" name="degree" value={this.state.exp.degree} required minLength="1"></input>
         </div>
         <div>
             <label name="start-date">Start date</label>
-            <input onChange={this.updateCurExp} type="text" id="start-date" name="start-date" defaultValue={this.state.exp.startDate} required minLength="4" maxLength="4"></input>
+            <input onChange={this.updateCurExp} type="text" id="start-date" name="start-date" value={this.state.exp.startDate} required minLength="4" maxLength="4"></input>
 
             <label name="end-date">End date</label>
-            <input onChange={this.updateCurExp} type="text" id="end-date" name="end-date" defaultValue={this.state.exp.endDate} required minLength="4" maxLength="4"></input>
+            <input onChange={this.updateCurExp} type="text" id="end-date" name="end-date" value={this.state.exp.endDate} required minLength="4" maxLength="4"></input>
         </div>
         <div>
             <button onClick={this.cancelExp}>Cancel</button>
