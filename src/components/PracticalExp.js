@@ -79,7 +79,6 @@ class PracticalExp extends Component {
       }
     }
     this.state.isEditingExp ? this.setState({isEditingExp: false, expInEdit: {}}) : this.setState({isEditingExp: true, expInEdit: exp});
-    console.log(this.props.practExp)
   };
 
   saveExpEdit = (e) => {
