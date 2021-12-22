@@ -73,7 +73,7 @@ class PracticalExp extends Component {
         e.preventDefault();
       } else {
         const id = e.target.parentNode.getAttribute('id');
-        const experiences = this.props.practExp;
+        const experiences = this.props.copyArrayOfObj(this.props.practExp);
         const expInd = experiences.findIndex((exp) => exp.id === id);
         exp = experiences[expInd];
       }

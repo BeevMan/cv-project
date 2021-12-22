@@ -69,10 +69,14 @@ class EducationExp extends Component {
   toggleIsEditing = (e) => {
     let exp;
     if (e) {
-      const id = e.target.parentNode.getAttribute('id');
-      const experiences = this.props.edExp;
-      const expInd = experiences.findIndex((exp) => exp.id === id);
-      exp = experiences[expInd];
+      if (e.target.innerText === 'Cancel') {
+        e.preventDefault();
+      } else {
+        const id = e.target.parentNode.getAttribute('id');
+        const experiences = this.props.copyArrayOfObj(this.props.edExp);
+        const expInd = experiences.findIndex((exp) => exp.id === id);
+        exp = experiences[expInd];
+      }
     }
     this.state.isEditingExp ? this.setState({isEditingExp: false, expInEdit: {}}) : this.setState({isEditingExp: true, expInEdit: exp});
   };

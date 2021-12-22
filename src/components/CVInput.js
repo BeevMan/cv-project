@@ -46,18 +46,18 @@ class CVInput extends Component {
     this.setState({[name]: value}, () => console.log("CVInput's state", this.state));
   };
 
-  logState = () => {
-    console.log(this.state)
+  copyArrayOfObj(arr) {
+    const newArray = arr.map((obj) => JSON.parse(JSON.stringify(obj)));
+    return newArray
   };
 
   render() {
 
     return (
       <div className="cv-inputs" >
-          <button onClick={this.logState}>log state</button>
           <GeneralInfo liftStateToCVInput={this.liftStateToCVInput} />
-          <EducationExp liftStateToCVInput={this.liftStateToCVInput} edExp={this.state.educationExp} />
-          <PracticalExp liftStateToCVInput={this.liftStateToCVInput} practExp={this.state.practicalExp} />
+          <EducationExp liftStateToCVInput={this.liftStateToCVInput} edExp={this.state.educationExp} copyArrayOfObj={this.copyArrayOfObj} />
+          <PracticalExp liftStateToCVInput={this.liftStateToCVInput} practExp={this.state.practicalExp} copyArrayOfObj={this.copyArrayOfObj} />
       </div>
     );
   }
